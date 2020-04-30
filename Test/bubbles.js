@@ -2,6 +2,13 @@
  * MAKE BUBBLE
  */
 class Bubble {
+// Acceleration
+ax = 1;
+ay = 15;
+
+vMultiplier = 0.01;
+bMultiplier = 1;
+
   constructor(x, y, diameter, velocityX, velocityY) {
     this.x = x;
     this.y = y;
@@ -34,6 +41,35 @@ class Bubble {
       this.velocityX = Math.abs(this.velocityX);
     }
   }
+
+
+bubbleBounce() {
+    this.velocityX = this.velocityX + this.ay;
+    this.velocityY = this.velocityY + this.ax;
+    this.y = this.y + this.velocityY * this.vMultiplier;
+    this.x = this.x + this.velocityX * this.vMultiplier;
+  
+    // Bounce when the bubble touches the edge of the canvas
+    if (this.x <= this.diameter/2) {
+      // this.x = this.diameter/2;
+      this.ax = -this.ax
+      this.velocityX = -this.velocityX;
+    }
+    if (this.velocityY <= 0) {
+      this.ay = -this.ay
+    }
+    if (this.x >= windowWidth - this.diameter/2) {
+      // this.x = windowWidth - this.diameter/2;
+      this.ax = -this.ax
+      this.velocityX = -this.velocityX;
+    }
+    if (this.y >= windowHeight - this.diameter/2) {
+      // this.y = windowHeight - this.diameter/2;
+      this.velocityY = -this.velocityY * this.bMultiplier;
+    }
+  }
+
+
 }
 
 /**
@@ -44,7 +80,7 @@ let img;
 const bubbles = [];
 
 function preload() {
-  img = loadImage("hamster.png");
+  // img = loadImage("hamster.png");
 }
 
 /**
@@ -53,7 +89,7 @@ function preload() {
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
 
-  const bubble = new Bubble(50, 50, 50, 5, 5);
+  const bubble = new Bubble(50, 50, 50, 10, 10);
   bubbles.push(bubble);
 }
 
@@ -64,7 +100,8 @@ function draw() {
   for (let i = 0; i < bubbles.length; i++) {
     const bubble = bubbles[i];
     bubble.drawBubble();
-    bubble.updateBubble();
+    // bubble.updateBubble();
+    bubble.bubbleBounce();
 
     // Check for kollisions
     if (
@@ -87,5 +124,5 @@ function draw() {
     }
   });
 
-  const player = image(img, playerDirection, window.innerHeight - 50, 50, 50);
+  // const player = image(img, playerDirection, window.innerHeight - 50, 50, 50);
 }
