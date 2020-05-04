@@ -3,11 +3,9 @@
  */
 class Bubble {
 // Acceleration
-ax = 1;
-ay = 15;
+ay = 5;
 
-vMultiplier = 0.01;
-bMultiplier = 1;
+vMultiplier = 0.1;
 
   constructor(x, y, diameter, velocityX, velocityY) {
     this.x = x;
@@ -44,28 +42,26 @@ bMultiplier = 1;
 
 
 bubbleBounce() {
-    this.velocityX = this.velocityX + this.ay;
-    this.velocityY = this.velocityY + this.ax;
+    this.velocityX = this.velocityX;
+    this.velocityY = this.velocityY + this.ay;
     this.y = this.y + this.velocityY * this.vMultiplier;
-    this.x = this.x + this.velocityX * this.vMultiplier;
+    this.x = this.x + this.velocityX;
   
-    // Bounce when the bubble touches the edge of the canvas
-    if (this.x <= this.diameter/2) {
+    // Bounce when touch the edge of the canvas
+    if (this.x < this.diameter/2) {
       // this.x = this.diameter/2;
-      this.ax = -this.ax
       this.velocityX = -this.velocityX;
     }
-    if (this.velocityY <= 0) {
-      this.ay = -this.ay
-    }
-    if (this.x >= windowWidth - this.diameter/2) {
+    if (this.x > windowWidth - this.diameter/2) {
       // this.x = windowWidth - this.diameter/2;
-      this.ax = -this.ax
       this.velocityX = -this.velocityX;
     }
-    if (this.y >= windowHeight - this.diameter/2) {
-      // this.y = windowHeight - this.diameter/2;
-      this.velocityY = -this.velocityY * this.bMultiplier;
+    if (this.y > windowHeight - this.diameter/2) {
+      this.y = windowHeight - this.diameter/2;
+      this.velocityY = -this.velocityY;
+    }
+    if (this.y <= windowHeight/3 - this.diameter/2 - 10){
+      this.y = windowHeight/3;
     }
   }
 
@@ -76,11 +72,20 @@ bubbleBounce() {
  * VARIABLES
  */
 let playerDirection = 0;
+let movePlayer = 0;
 let img;
 const bubbles = [];
 
 function preload() {
-  // img = loadImage("hamster.png");
+  
+    img = createImage(50, 50);
+    img.loadPixels();
+    for (let i = 0; i < img.width; i++) {
+      for (let j = 0; j < img.height; j++) {
+        img.set(i, j, color(0, 90, 102));
+      }
+    }
+  img.updatePixels()
 }
 
 /**
@@ -89,8 +94,7 @@ function preload() {
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
 
-  const bubble = new Bubble(50, 50, 50, 10, 10);
-  bubbles.push(bubble);
+  bubbles.push(new Bubble(windowWidth/2, windowHeight/3, 50, 5, 5));
 }
 
 function draw() {
@@ -106,23 +110,24 @@ function draw() {
     // Check for kollisions
     if (
       bubble.y + bubble.diameter / 2 >= window.innerHeight - 60 &&
-      bubble.x + bubble.diameter / 2 < playerDirection + 60 &&
+      bubble.x + bubble.diameter / 2 < playerDirection + 50 &&
       bubble.x + bubble.diameter / 2 > playerDirection
     ) {
       bubbles.pop(bubble);
     }
   }
 
-  // Read key press and change players direction
-  document.addEventListener("keydown", function (event) {
-    const key = event.key;
-
-    if (key === "ArrowRight") {
-      playerDirection += 0.05;
-    } else if (key === "ArrowLeft") {
-      playerDirection -= 0.05;
-    }
-  });
-
-  // const player = image(img, playerDirection, window.innerHeight - 50, 50, 50);
+  image(img, playerDirection, window.innerHeight - 50, 50, 50);
 }
+
+
+// Read key press and change players direction
+document.addEventListener("keydown", function (event) {
+  const key = event.key;
+
+  if (key === "ArrowRight") {
+    playerDirection += 10;
+  } else if (key === "ArrowLeft") {
+    playerDirection -= 10;
+  }
+});
