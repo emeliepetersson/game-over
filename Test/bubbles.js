@@ -2,6 +2,11 @@
  * MAKE BUBBLE
  */
 class Bubble {
+// Acceleration
+ay = 5;
+
+vMultiplier = 0.1;
+
   constructor(x, y, diameter, velocityX, velocityY) {
     this.x = x;
     this.y = y;
@@ -34,17 +39,53 @@ class Bubble {
       this.velocityX = Math.abs(this.velocityX);
     }
   }
+
+
+bubbleBounce() {
+    this.velocityX = this.velocityX;
+    this.velocityY = this.velocityY + this.ay;
+    this.y = this.y + this.velocityY * this.vMultiplier;
+    this.x = this.x + this.velocityX;
+  
+    // Bounce when touch the edge of the canvas
+    if (this.x < this.diameter/2) {
+      // this.x = this.diameter/2;
+      this.velocityX = -this.velocityX;
+    }
+    if (this.x > windowWidth - this.diameter/2) {
+      // this.x = windowWidth - this.diameter/2;
+      this.velocityX = -this.velocityX;
+    }
+    if (this.y > windowHeight - this.diameter/2) {
+      this.y = windowHeight - this.diameter/2;
+      this.velocityY = -this.velocityY;
+    }
+    if (this.y <= windowHeight/3 - this.diameter/2 - 10){
+      this.y = windowHeight/3;
+    }
+  }
+
+
 }
 
 /**
  * VARIABLES
  */
 let playerDirection = 0;
+let movePlayer = 0;
 let img;
 const bubbles = [];
 
 function preload() {
-  img = loadImage("hamster.png");
+  
+    img = createImage(50, 50);
+    img.loadPixels();
+    for (let i = 0; i < img.width; i++) {
+      for (let j = 0; j < img.height; j++) {
+        img.set(i, j, color(0, 90, 102));
+      }
+    }
+  img.updatePixels()
 }
 
 /**
@@ -53,8 +94,7 @@ function preload() {
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
 
-  const bubble = new Bubble(50, 50, 50, 5, 5);
-  bubbles.push(bubble);
+  bubbles.push(new Bubble(windowWidth/2, windowHeight/3, 50, 5, 5));
 }
 
 function draw() {
@@ -64,28 +104,30 @@ function draw() {
   for (let i = 0; i < bubbles.length; i++) {
     const bubble = bubbles[i];
     bubble.drawBubble();
-    bubble.updateBubble();
+    // bubble.updateBubble();
+    bubble.bubbleBounce();
 
     // Check for kollisions
     if (
       bubble.y + bubble.diameter / 2 >= window.innerHeight - 60 &&
-      bubble.x + bubble.diameter / 2 < playerDirection + 60 &&
+      bubble.x + bubble.diameter / 2 < playerDirection + 50 &&
       bubble.x + bubble.diameter / 2 > playerDirection
     ) {
       bubbles.pop(bubble);
     }
   }
 
-  // Read key press and change players direction
-  document.addEventListener("keydown", function (event) {
-    const key = event.key;
-
-    if (key === "ArrowRight") {
-      playerDirection += 0.05;
-    } else if (key === "ArrowLeft") {
-      playerDirection -= 0.05;
-    }
-  });
-
-  const player = image(img, playerDirection, window.innerHeight - 50, 50, 50);
+  image(img, playerDirection, window.innerHeight - 50, 50, 50);
 }
+
+
+// Read key press and change players direction
+document.addEventListener("keydown", function (event) {
+  const key = event.key;
+
+  if (key === "ArrowRight") {
+    playerDirection += 10;
+  } else if (key === "ArrowLeft") {
+    playerDirection -= 10;
+  }
+});
