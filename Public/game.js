@@ -7,14 +7,14 @@ function setup() {
 function draw() {
   background(255);
 
-  // draw bubbles
+  // Draw bubbles
   for (let i = 0; i < bubbles.length; i++) {
     const bubble = bubbles[i];
     bubble.drawBubble();
     // bubble.updateBubble();
     bubble.bubbleBounce();
 
-    // Check for kollisions
+    // Check for collisions
     if (
       bubble.y + bubble.diameter / 2 >= window.innerHeight - 60 &&
       bubble.x + bubble.diameter / 2 < playerDirection + 50 &&
@@ -24,10 +24,22 @@ function draw() {
     }
   }
 
+  //Draw arrow
+  for (let i = 0; i < arrows.length; i++) {
+    const arrow = arrows[i];
+    arrow.drawArrow();
+    arrow.shootArrow();
+
+    if (arrow.direction < 0) {
+      arrows.pop(arrow);
+    }
+  }
+
+  //Draw Player
   image(img, playerDirection, window.innerHeight - 50, 50, 50);
 }
 
-// Read key press and change players direction
+// Read key press to change players direction and shoot arrows
 document.addEventListener("keydown", function (event) {
   const key = event.key;
 
@@ -35,5 +47,9 @@ document.addEventListener("keydown", function (event) {
     playerDirection += 10;
   } else if (key === "ArrowLeft") {
     playerDirection -= 10;
+  } else if (key === " ") {
+    arrows.push(
+      new Arrow(playerDirection + 25, windowHeight + 300, windowHeight)
+    );
   }
 });
