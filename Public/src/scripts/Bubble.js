@@ -61,9 +61,9 @@ class Bubble {
     if (this.y > windowHeight - this.diameter / 2) {
       this.y = windowHeight - this.diameter / 2;
       this.velocityY = -this.velocityY;
-    }
+    }/*
     if (this.y <= windowHeight / 3 - this.diameter / 2 - 10) {
       this.y = windowHeight / 3;
-    }
+    }*/
   }
 }
