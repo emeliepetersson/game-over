@@ -11,7 +11,6 @@ function draw() {
   for (let i = 0; i < bubbles.length; i++) {
     const bubble = bubbles[i];
     bubble.drawBubble();
-    // bubble.updateBubble();
     bubble.bubbleBounce();
 
     // Check for collisions
@@ -27,10 +26,28 @@ function draw() {
   //Draw arrow
   for (let i = 0; i < arrows.length; i++) {
     const arrow = arrows[i];
+
     arrow.shootArrow();
 
     if (arrow.vec.y < -windowHeight) {
       arrows.pop(arrow);
+    }
+
+    //Check for collision between arrow and bubbles
+    for (let i = 0; i < bubbles.length; i++) {
+      const bubble = bubbles[i];
+      if (
+        arrow.base.x <= Math.floor(bubble.x + bubble.diameter / 2) &&
+        arrow.base.x >= Math.floor(bubble.x - bubble.diameter / 2) &&
+        Math.abs(arrow.vec.y) >=
+          Math.floor(bubble.y + bubble.diameter / 2 + 120)
+      ) {
+        //arrows.pop(arrow);
+        bubbles.pop(bubble);
+        console.log("works");
+        console.log("arrow x: " + Math.abs(arrow.vec.y));
+        console.log("bubble y: " + Math.floor(bubble.y + bubble.diameter / 2));
+      }
     }
   }
 
@@ -38,7 +55,7 @@ function draw() {
   image(img, playerDirection, window.innerHeight - 50, 50, 50);
 }
 
-// Read key press to change players direction and shoot arrows
+// Read key presses to change players direction and shoot arrows
 document.addEventListener("keydown", function (event) {
   const key = event.key;
 
