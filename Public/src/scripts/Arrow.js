@@ -1,16 +1,20 @@
 class Arrow {
-  constructor(positionX, direction, startPositionY) {
-    this.positionX = positionX;
-    this.direction = direction;
-    this.startPositionY = startPositionY;
+  constructor(base, vec) {
+    this.base = base;
+    this.vec = vec;
   }
-
-  drawArrow() {
-    stroke(126);
-    line(this.positionX, this.direction, this.positionX, this.startPositionY);
-  }
-
   shootArrow() {
-    this.direction = this.direction - 10;
+    push();
+    stroke(120);
+    strokeWeight(2);
+    fill(120);
+    translate(this.base.x, this.base.y);
+    line(0, 0, this.vec.x, this.vec.y);
+    rotate(this.vec.heading());
+    let arrowSize = 7;
+    translate(this.vec.mag() - arrowSize, 0);
+    triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0);
+    this.vec.y -= 10;
+    pop();
   }
 }

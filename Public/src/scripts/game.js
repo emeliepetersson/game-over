@@ -27,10 +27,9 @@ function draw() {
   //Draw arrow
   for (let i = 0; i < arrows.length; i++) {
     const arrow = arrows[i];
-    arrow.drawArrow();
     arrow.shootArrow();
 
-    if (arrow.direction < 0) {
+    if (arrow.vec.y < -windowHeight) {
       arrows.pop(arrow);
     }
   }
@@ -48,8 +47,8 @@ document.addEventListener("keydown", function (event) {
   } else if (key === "ArrowLeft") {
     playerDirection -= 10;
   } else if (key === " ") {
-    arrows.push(
-      new Arrow(playerDirection + 25, windowHeight + 300, windowHeight)
-    );
+    let base = createVector(playerDirection + 25, windowHeight);
+    let vec = createVector(0, 0);
+    arrows.push(new Arrow(base, vec));
   }
 });
