@@ -7,17 +7,17 @@ class Bubble {
 
   vMultiplier = 0.1;
 
-  constructor(x, y, diameter, velocityX, velocityY) {
+  constructor(x, y, diameter, velocityX, velocityY, color) {
     this.x = x;
     this.y = y;
     this.diameter = diameter;
     this.velocityX = velocityX;
     this.velocityY = velocityY;
+    this.color = color;
   }
 
   drawBubble() {
-    const c = color(255, 0, 0);
-    fill(c);
+    fill(this.color);
     noStroke();
     circle(this.x, this.y, this.diameter);
   }
@@ -58,12 +58,12 @@ class Bubble {
       // this.x = windowWidth - this.diameter/2;
       this.velocityX = -this.velocityX;
     }
-    if (this.y > windowHeight - this.diameter / 2) {
-      this.y = windowHeight - this.diameter / 2;
+    if (this.y > height - this.diameter / 2) {
+      this.y = height - this.diameter / 2;
       this.velocityY = -this.velocityY;
-    }/*
-    if (this.y <= windowHeight / 3 - this.diameter / 2 - 10) {
-      this.y = windowHeight / 3;
-    }*/
+    }
+    if (this.y <= height / 3 - this.diameter / 2 - 10) {
+      this.y = height / 3;
+    }
   }
 }
