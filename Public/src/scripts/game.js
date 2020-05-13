@@ -1,7 +1,7 @@
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
 
-  bubbles.push(new Bubble(width / 2, height / 3, 50, 5, 5));
+  bubbles.push(new Bubble(width / 2, height / 3, 100, 5, 5, randomColor()));
 }
 
 function draw() {
@@ -20,6 +20,7 @@ function draw() {
       bubble.x + bubble.diameter / 2 >= playerDirection
     ) {
       bubbles.pop(bubble);
+      //THIS IS WHERE THE CODE FOR GAME OVER GOES
     }
   }
 
@@ -42,7 +43,21 @@ function draw() {
         Math.abs(arrow.vec.y) <= bubble.y + bubble.diameter / 2
       ) {
         arrows.pop(arrow);
-        bubbles.pop(bubble);
+
+        //Create two new bubbles
+        if (bubble.diameter > 20) {
+          const newDiameter = bubble.diameter / 2;
+          const color = randomColor();
+          bubbles.pop(bubble);
+          bubbles.push(
+            new Bubble(bubble.x, bubble.y, newDiameter, -5, -5, color)
+          );
+          bubbles.push(
+            new Bubble(bubble.x, bubble.y, newDiameter, 5, 5, color)
+          );
+        } else {
+          bubbles.pop(bubble);
+        }
       }
     }
   }

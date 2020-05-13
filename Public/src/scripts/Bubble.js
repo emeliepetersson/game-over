@@ -7,17 +7,17 @@ class Bubble {
 
   vMultiplier = 0.1;
 
-  constructor(x, y, diameter, velocityX, velocityY) {
+  constructor(x, y, diameter, velocityX, velocityY, color) {
     this.x = x;
     this.y = y;
     this.diameter = diameter;
     this.velocityX = velocityX;
     this.velocityY = velocityY;
+    this.color = color;
   }
 
   drawBubble() {
-    const c = color(255, 0, 0);
-    fill(c);
+    fill(this.color);
     noStroke();
     circle(this.x, this.y, this.diameter);
   }
