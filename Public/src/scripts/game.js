@@ -68,6 +68,10 @@ function draw() {
 // Read key presses to shoot arrows
 function keyPressed() {
   if (keyCode === 32) {
+    console.log(arrows.length);
+    if (arrows.length > 0) {
+      return;
+    }
     let base = createVector(playerDirection + 25, height);
     let vec = createVector(height, height);
     arrows.push(new Arrow(base, vec));
