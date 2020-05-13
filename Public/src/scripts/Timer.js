@@ -8,7 +8,6 @@ function counter(maxTime) {
 	},1000, i)
 }
 
-
 class Timer {
 	score = 0;
 	scorePerSecond;

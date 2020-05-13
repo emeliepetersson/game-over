@@ -6,7 +6,7 @@ function start(){
   timer = new Timer(120, 10);
   timer.start()
   startTime = true;
-  bubbles.push(new Bubble(width / 2, height / 3, 100, 5, 5, randomColor()));
+  
 }
 
 function draw() {
@@ -113,6 +113,6 @@ function keyPressed() {
     end(timer);
   }else if(key === "s"){
     start()
-    bubbles.push(new Bubble(windowWidth / 2, Math.floor(windowHeight / 3), 50, 5, 5));
+    bubbles.push(new Bubble(width / 2, Math.floor(height / 3), 100, 5, 5, randomColor()));
   }
 }
