@@ -1,8 +1,5 @@
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
-
-  bubbles.push(new Bubble(windowWidth / 2, Math.floor(windowHeight / 3), 50, 5, 5));
-  
 }
 
 function start(){
@@ -13,6 +10,15 @@ function start(){
 
 function draw() {
   background(255);
+  if (time == 0) {
+    bubbles.pop();
+    push();
+		fill(0, 0, 0);
+		stroke(51);
+		textSize(20);
+		text(`Game Over`, windowWidth / 2, windowHeight/ 2);
+		pop();
+  }
   
   // Draw bubbles
   for (let i = 0; i < bubbles.length; i++) {
@@ -25,7 +31,7 @@ function draw() {
     if (
       bubble.y + bubble.diameter / 2 >= window.innerHeight - 50 &&
       bubble.x + bubble.diameter / 2 < playerDirection + 50 &&
-      bubble.x - bubble.diameter / 2 >= playerDirection
+      bubble.x - bubble.diameter / 2 > playerDirection
     ) {
       bubbles.pop(bubble);
     }
@@ -71,5 +77,6 @@ document.addEventListener("keydown", function (event) {
     end(timer);
   }else if(key === "s"){
     start()
+    bubbles.push(new Bubble(windowWidth / 2, Math.floor(windowHeight / 3), 50, 5, 5));
   }
 });

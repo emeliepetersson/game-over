@@ -5,7 +5,6 @@ function counter(maxTime) {
 	seconds = setInterval(function(){
 		i--;
 		time = i;
-		console.log(i);
 	},1000, i)
 }
 
@@ -22,18 +21,17 @@ class Timer {
 
 	draw(){
 		this.time = time;
-		this.highScore = getItem("highScore")
 		if (this.time === 0) {
 			end()
 		}
 		// this.currentTime = this.currentTime - (this.startTime / deltaTime);
-		removeElements();
 		push();
 		fill(0, 0, 0);
 		stroke(51);
 		textSize(20);
 		text(`Time Left: ${this.time}`, 5, 20);
-		text(`Score: ${this.score}`, 5, 20);
+		text(`Score: ${this.score}`, 5, 40);
+		text(`High Score: ${this.highScore}`, 5, 60);
 		pop();
 	}
 
@@ -44,7 +42,6 @@ class Timer {
 	end(){
 		if (this.time != 0) {
 			const score = this.time * this.scorePerSecond;
-			storeItem("highScore", score)
 			return score;
 		}
 
