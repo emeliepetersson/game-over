@@ -16,6 +16,7 @@ class Timer {
 	
 	constructor(maxTime, scorePerSecond){
 		this.time = maxTime;
+		this.maxTime = maxTime;
 		this.scorePerSecond = scorePerSecond;
 	}
 
@@ -24,7 +25,6 @@ class Timer {
 		if (this.time === 0) {
 			end()
 		}
-		// this.currentTime = this.currentTime - (this.startTime / deltaTime);
 		push();
 		fill(0, 0, 0);
 		stroke(51);
@@ -36,16 +36,16 @@ class Timer {
 	}
 
 	start(){
-		counter(120);
+		counter(this.maxTime);
 	}
 
 	end(){
+		clearInterval(seconds);
 		if (this.time != 0) {
 			const score = this.time * this.scorePerSecond;
 			return score;
 		}
-
-		this.time = 0;
+	
 		return 0;
 		
 	}

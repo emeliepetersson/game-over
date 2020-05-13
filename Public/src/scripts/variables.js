@@ -4,5 +4,6 @@ let img;
 let time;
 let timer;
 let startTime;
+let seconds;
 const bubbles = [];
 const arrows = [];
