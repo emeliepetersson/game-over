@@ -13,31 +13,23 @@ function draw() {
     bubble.drawBubble();
     bubble.bubbleBounce();
 
-    // Check for collisions
+    // Check for collisions between bubble and player
     if (
-      bubble.y + bubble.diameter / 2 >= height - 60 &&
-      bubble.x + bubble.diameter / 2 < playerDirection + 50 &&
-      bubble.x + bubble.diameter / 2 > playerDirection
+      bubble.y + bubble.diameter / 2 >= height - 50 &&
+      bubble.x - bubble.diameter / 2 <= playerDirection + 50 &&
+      bubble.x + bubble.diameter / 2 >= playerDirection
     ) {
       bubbles.pop(bubble);
     }
   }
 
   //Draw arrow
-  // new Arrow(
-  //   createVector(playerDirection + 25, height),
-  //   createVector(height, 400)
-  // ).shootArrow();
-
   for (let i = 0; i < arrows.length; i++) {
     const arrow = arrows[i];
 
     arrow.shootArrow();
 
-    console.log("vec y :" + Math.abs(arrow.vec.y));
-    console.log("Canvas: " + height);
-
-    if (arrow.vec.y < -height) {
+    if (arrow.vec.y <= 0) {
       arrows.pop(arrow);
     }
 
@@ -58,6 +50,7 @@ function draw() {
   //Draw Player
   image(img, playerDirection, height - 50, 50, 50);
 
+  // Read key presses to change player's direction
   if (keyIsDown(LEFT_ARROW)) {
     if (playerDirection - 10 < 0) {
       return;
@@ -72,12 +65,9 @@ function draw() {
   }
 }
 
-// Read key presses to change players direction and shoot arrows
+// Read key presses to shoot arrows
 function keyPressed() {
   if (keyCode === 32) {
-    //let base = createVector(playerDirection + 25, windowHeight);
-    // let vec = createVector(0, 0);
-    // arrows.push(new Arrow(base, vec));
     let base = createVector(playerDirection + 25, height);
     let vec = createVector(height, height);
     arrows.push(new Arrow(base, vec));
