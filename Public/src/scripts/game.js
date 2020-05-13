@@ -39,33 +39,36 @@ function draw() {
       if (
         arrow.base.x <= Math.floor(bubble.x + bubble.diameter / 2) &&
         arrow.base.x >= Math.floor(bubble.x - bubble.diameter / 2) &&
-        Math.abs(arrow.vec.y) >=
-          Math.floor(bubble.y + bubble.diameter / 2 + 120)
+        Math.abs(arrow.vec.y) >= Math.floor(bubble.y + bubble.diameter / 2)
       ) {
-        //arrows.pop(arrow);
+        arrows.pop(arrow);
         bubbles.pop(bubble);
-        console.log("works");
-        console.log("arrow x: " + Math.abs(arrow.vec.y));
-        console.log("bubble y: " + Math.floor(bubble.y + bubble.diameter / 2));
       }
     }
   }
 
   //Draw Player
   image(img, playerDirection, window.innerHeight - 50, 50, 50);
+
+  if (keyIsDown(LEFT_ARROW)) {
+    if (playerDirection - 10 < 0) {
+      return;
+    }
+    playerDirection -= 10;
+  }
+  if (keyIsDown(RIGHT_ARROW)) {
+    if (playerDirection + 60 > windowWidth) {
+      return;
+    }
+    playerDirection += 10;
+  }
 }
 
 // Read key presses to change players direction and shoot arrows
-document.addEventListener("keydown", function (event) {
-  const key = event.key;
-
-  if (key === "ArrowRight") {
-    playerDirection += 10;
-  } else if (key === "ArrowLeft") {
-    playerDirection -= 10;
-  } else if (key === " ") {
+function keyPressed() {
+  if (keyCode === 32) {
     let base = createVector(playerDirection + 25, windowHeight);
     let vec = createVector(0, 0);
     arrows.push(new Arrow(base, vec));
   }
-});
+}
