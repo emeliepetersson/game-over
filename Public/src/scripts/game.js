@@ -96,7 +96,7 @@ function draw() {
   }
 }
 
-function end(timer){
+function end(){
   clearInterval(seconds);
 }
 
@@ -110,7 +110,6 @@ function keyPressed() {
     let base = createVector(playerDirection + 25, height);
     let vec = createVector(height, height);
     arrows.push(new Arrow(base, vec));
-    end(timer);
   }else if(key === "s"){
     start()
     bubbles.push(new Bubble(width / 2, Math.floor(height / 3), 100, 5, 5, randomColor()));
