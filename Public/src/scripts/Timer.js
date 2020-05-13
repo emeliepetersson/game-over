@@ -1,39 +1,56 @@
-function updateTime(currentTime){
-	let time = currentTime;
-	time =- 1;
-	console.log(currentTime);
+
+function counter(maxTime) {
+	var i = maxTime;
+	time = maxTime;
+	seconds = setInterval(function(){
+		i--;
+		time = i;
+		console.log(i);
+	},1000, i)
 }
 
 
 class Timer {
+	score = 0;
 	scorePerSecond;
-	currentTime;
-	startTime = new Date().getSeconds();
 	end = false;
 	
 	constructor(maxTime, scorePerSecond){
 		this.time = maxTime;
 		this.scorePerSecond = scorePerSecond;
-		this.currentTime = this.maxTime - this.startTime;
-		this.lastPrint = millis() - 1000;
 	}
 
 	draw(){
+		this.time = time;
+		this.highScore = getItem("highScore")
+		if (this.time === 0) {
+			end()
+		}
 		// this.currentTime = this.currentTime - (this.startTime / deltaTime);
 		removeElements();
 		push();
+		fill(0, 0, 0);
 		stroke(51);
-		text(`${this.time}`, 10, 10);
+		textSize(20);
+		text(`Time Left: ${this.time}`, 5, 20);
+		text(`Score: ${this.score}`, 5, 20);
 		pop();
 	}
 
 	start(){
-		var timeElapsed = millis() - this.lastPrint;
-		if (timeElapsed > 1000 && this.time != 0) {
-		  this.time--;
-		  this.lastPrint = millis();
-		}
+		counter(120);
 	}
 
+	end(){
+		if (this.time != 0) {
+			const score = this.time * this.scorePerSecond;
+			storeItem("highScore", score)
+			return score;
+		}
+
+		this.time = 0;
+		return 0;
+		
+	}
 	
 }

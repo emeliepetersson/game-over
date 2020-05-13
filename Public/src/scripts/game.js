@@ -2,7 +2,13 @@ function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
 
   bubbles.push(new Bubble(windowWidth / 2, Math.floor(windowHeight / 3), 50, 5, 5));
+  
+}
+
+function start(){
   timer = new Timer(120, 10);
+  timer.start()
+  startTime = true;
 }
 
 function draw() {
@@ -29,7 +35,7 @@ function draw() {
   for (let i = 0; i < arrows.length; i++) {
     const arrow = arrows[i];
     arrow.shootArrow();
-    
+    end();
     if (arrow.vec.y < -windowHeight) {
       arrows.pop(arrow);
     }
@@ -38,13 +44,16 @@ function draw() {
   //Draw Player
   
   image(img, playerDirection, window.innerHeight - 50, 50, 50);
-  timer.start();
-  timer.draw();
+  if (startTime === true) {
+    timer.draw();
+  }
+  
   
 }
 
+
 function end(timer){
-  timer.end = true;
+  clearInterval(seconds);
 }
 
 // Read key press to change players direction and shoot arrows
@@ -60,5 +69,7 @@ document.addEventListener("keydown", function (event) {
     let vec = createVector(0, 0);
     arrows.push(new Arrow(base, vec));
     end(timer);
+  }else if(key === "s"){
+    start()
   }
 });
