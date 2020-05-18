@@ -7,3 +7,4 @@ let startTime;
 let seconds;
 const bubbles = [];
 const arrows = [];
+let c1, c2;

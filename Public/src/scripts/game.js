@@ -1,26 +1,29 @@
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
+  c1 = color(219, 248, 255);
+  c2 = color(202, 252, 175);
 }
 
-function start(){
+function start() {
   timer = new Timer(120, 10);
-  timer.start()
+  timer.start();
   startTime = true;
-  
 }
 
 function draw() {
-  background(255);
+  // Background
+  setGradient(0, 0, width, height, c1, c2);
+
   if (time == 0) {
     bubbles.pop();
     push();
-		fill(0, 0, 0);
-		stroke(51);
-		textSize(20);
-		text(`Game Over`, windowWidth / 2, windowHeight/ 2);
-		pop();
+    fill(0, 0, 0);
+    stroke(51);
+    textSize(20);
+    text(`Game Over`, windowWidth / 2, windowHeight / 2);
+    pop();
   }
-  
+
   // Draw bubbles
   for (let i = 0; i < bubbles.length; i++) {
     const bubble = bubbles[i];
@@ -29,8 +32,8 @@ function draw() {
 
     // Check for collisions between bubble and player
     if (
-      bubble.y + bubble.diameter / 2 >= height - 50 &&
-      bubble.x - bubble.diameter / 2 <= playerDirection + 50 &&
+      bubble.y + bubble.diameter / 2 >= height - 70 &&
+      bubble.x - bubble.diameter / 2 <= playerDirection + 70 &&
       bubble.x + bubble.diameter / 2 >= playerDirection
     ) {
       bubbles.pop(bubble);
@@ -79,7 +82,7 @@ function draw() {
     timer.draw();
   }
   //Draw Player
-  image(img, playerDirection, height - 50, 50, 50);
+  image(img, playerDirection, height - 70, 70, 70);
 
   // Read key presses to change player's direction
   if (keyIsDown(LEFT_ARROW)) {
@@ -96,22 +99,23 @@ function draw() {
   }
 }
 
-function end(){
+function end() {
   clearInterval(seconds);
 }
 
-// Read key presses to shoot arrows
+// Read key presses
 function keyPressed() {
   if (keyCode === 32) {
-    console.log(arrows.length);
     if (arrows.length > 0) {
       return;
     }
     let base = createVector(playerDirection + 25, height);
     let vec = createVector(height, height);
     arrows.push(new Arrow(base, vec));
-  }else if(key === "s"){
-    start()
-    bubbles.push(new Bubble(width / 2, Math.floor(height / 3), 100, 5, 5, randomColor()));
+  } else if (key === "s") {
+    start();
+    bubbles.push(
+      new Bubble(width / 2, Math.floor(height / 3), 80, 5, 5, randomColor())
+    );
   }
 }
