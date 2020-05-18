@@ -1,12 +1,26 @@
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
+}
 
-  bubbles.push(new Bubble(width / 2, height / 3, 100, 5, 5, randomColor()));
+function start(){
+  timer = new Timer(120, 10);
+  timer.start()
+  startTime = true;
+  
 }
 
 function draw() {
   background(255);
-
+  if (time == 0) {
+    bubbles.pop();
+    push();
+		fill(0, 0, 0);
+		stroke(51);
+		textSize(20);
+		text(`Game Over`, windowWidth / 2, windowHeight/ 2);
+		pop();
+  }
+  
   // Draw bubbles
   for (let i = 0; i < bubbles.length; i++) {
     const bubble = bubbles[i];
@@ -29,7 +43,6 @@ function draw() {
     const arrow = arrows[i];
 
     arrow.shootArrow();
-
     if (arrow.vec.y <= 0) {
       arrows.pop(arrow);
     }
@@ -62,6 +75,9 @@ function draw() {
     }
   }
 
+  if (startTime === true) {
+    timer.draw();
+  }
   //Draw Player
   image(img, playerDirection, height - 50, 50, 50);
 
@@ -80,6 +96,10 @@ function draw() {
   }
 }
 
+function end(){
+  clearInterval(seconds);
+}
+
 // Read key presses to shoot arrows
 function keyPressed() {
   if (keyCode === 32) {
@@ -90,5 +110,8 @@ function keyPressed() {
     let base = createVector(playerDirection + 25, height);
     let vec = createVector(height, height);
     arrows.push(new Arrow(base, vec));
+  }else if(key === "s"){
+    start()
+    bubbles.push(new Bubble(width / 2, Math.floor(height / 3), 100, 5, 5, randomColor()));
   }
 }
