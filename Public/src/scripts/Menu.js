@@ -1,9 +1,6 @@
 class Menu{
-
 	menuX = width/2;
 	menuY = height/3 + 50;
-
-
 
 	draw(){
 		push()

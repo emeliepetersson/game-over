@@ -114,25 +114,23 @@ function keyPressed() {
   }
   //up
   else if(keyCode === 38){
-    if(menuPos > 1){
+    if(menuPos > 1 && !gameStart){
       menuPos--;
     }
   }
   // down
-  else if(keyCode === 40){
+  else if(keyCode === 40 && !gameStart){
     if(menuPos < 3){
       menuPos++;
     }
   }
   //enter
-  else if(keyCode === 13){
+  else if(keyCode === 13 && !gameStart){
     if (menuPos === 1) {
       gameOver = false;
       start()
       bubbles.push(new Bubble(width / 2, Math.floor(height / 3), 100, 5, 5, randomColor()));
     }
   }
-
-  console.log(key);
   
 }

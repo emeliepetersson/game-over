@@ -22,7 +22,7 @@ class Timer {
 	draw(){
 		this.time = time;
 		if (this.time === 0) {
-			end()
+			gameOver()
 		}
 		push();
 		fill(0, 0, 0);
