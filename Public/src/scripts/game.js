@@ -1,23 +1,26 @@
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
+
   menu = new Menu();
+  c1 = color(219, 248, 255);
+  c2 = color(202, 252, 175);
 }
 
-function start(){
+function start() {
   timer = new Timer(120, 10);
   timer.start()
   gameStart = true;
-  
 }
 
 function draw() {
-  background(255);
+  // Background
+  setGradient(0, 0, width, height, c1, c2);
   if (!gameStart) {
     menu.draw();
   }else {
     timer.draw();
   }
-  
+
   // Draw bubbles
   for (let i = 0; i < bubbles.length; i++) {
     const bubble = bubbles[i];
@@ -26,8 +29,8 @@ function draw() {
 
     // Check for collisions between bubble and player
     if (
-      bubble.y + bubble.diameter / 2 >= height - 50 &&
-      bubble.x - bubble.diameter / 2 <= playerDirection + 50 &&
+      bubble.y + bubble.diameter / 2 >= height - 70 &&
+      bubble.x - bubble.diameter / 2 <= playerDirection + 70 &&
       bubble.x + bubble.diameter / 2 >= playerDirection
       || time == 0
     ) {
@@ -85,7 +88,7 @@ function draw() {
   }
 
   //Draw Player
-  image(img, playerDirection, height - 50, 50, 50);
+  image(img, playerDirection, height - 70, 70, 70);
 
   // Read key presses to change player's direction
   if (keyIsDown(LEFT_ARROW)) {
@@ -102,7 +105,8 @@ function draw() {
   }
 }
 
-// Read key presses to shoot arrows
+
+// Read key presses
 function keyPressed() {
   if (keyCode === 32) {
     if (arrows.length > 0) {

@@ -10,3 +10,4 @@ let seconds;
 let gameOver = false;
 const bubbles = [];
 const arrows = [];
+let c1, c2;
