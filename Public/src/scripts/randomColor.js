@@ -1,3 +1,3 @@
 function randomColor() {
-  return color(random(1, 255), random(1, 255), random(1, 250));
+    return color(random(1, 255), random(1, 255), random(1, 250));
 }

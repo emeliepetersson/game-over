@@ -1,54 +1,55 @@
-
 function counter(maxTime) {
-	var i = maxTime;
-	time = maxTime;
-	seconds = setInterval(function(){
-		i--;
-		time = i;
-	},1000, i)
+    var i = maxTime;
+    time = maxTime;
+    seconds = setInterval(
+        function () {
+            i--;
+            time = i;
+        },
+        1000,
+        i
+    );
 }
 
 class Timer {
-	score = 0;
-	scorePerSecond;
-	end = false;
-	
-	constructor(maxTime, scorePerSecond){
-		this.time = maxTime;
-		this.maxTime = maxTime;
-		this.scorePerSecond = scorePerSecond;
-	}
+    score = 0;
+    scorePerSecond;
+    end = false;
 
-	draw(){
-		this.time = time;
-		if (this.time === 0) {
-			gameOver()
-		}
-		push();
-		fill(0, 0, 0);
-		stroke(51);
-		textSize(20);
-		text(`Time Left: ${this.time}`, 5, 20);
-		text(`Score: ${this.score}`, 5, 40);
-		text(`High Score: ${this.highScore}`, 5, 60);
-		pop();
-	}
+    constructor(maxTime, scorePerSecond) {
+        this.time = maxTime;
+        this.maxTime = maxTime;
+        this.scorePerSecond = scorePerSecond;
+    }
 
-	start(){
-		counter(this.maxTime);
-	}
+    draw() {
+        this.time = time;
+        if (this.time === 0) {
+            gameOver();
+        }
+        push();
+        fill(0, 0, 0);
+        stroke(51);
+        textSize(20);
+        text(`Time Left: ${this.time}`, 5, 20);
+        text(`Score: ${this.score}`, 5, 40);
+        text(`High Score: ${this.highScore}`, 5, 60);
+        pop();
+    }
 
-	end(){
-		clearInterval(seconds);
-		const score = this.time * this.scorePerSecond;
-		gameStart = false;
-		return score;
-		
-	}
+    start() {
+        counter(this.maxTime);
+    }
 
-	gameOver(){
-		clearInterval(seconds);
-		gameStart = false;
-	}
-	
+    end() {
+        clearInterval(seconds);
+        const score = this.time * this.scorePerSecond;
+        gameStart = false;
+        return score;
+    }
+
+    gameOver() {
+        clearInterval(seconds);
+        gameStart = false;
+    }
 }
