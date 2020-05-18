@@ -14,6 +14,8 @@ function draw() {
   background(255);
   if (!gameStart) {
     menu.draw();
+  }else {
+    timer.draw();
   }
   
   // Draw bubbles
@@ -72,9 +74,7 @@ function draw() {
           const color = randomColor();
           bubbles.pop(bubble);
           bubbles.push(
-            new Bubble(bubble.x, bubble.y, newDiameter, -5, -5, color)
-          );
-          bubbles.push(
+            new Bubble(bubble.x, bubble.y, newDiameter, -5, -5, color),
             new Bubble(bubble.x, bubble.y, newDiameter, 5, 5, color)
           );
         } else {
@@ -84,9 +84,6 @@ function draw() {
     }
   }
 
-  if (gameStart === true) {
-    timer.draw();
-  }
   //Draw Player
   image(img, playerDirection, height - 50, 50, 50);
 
@@ -108,7 +105,6 @@ function draw() {
 // Read key presses to shoot arrows
 function keyPressed() {
   if (keyCode === 32) {
-    console.log(arrows.length);
     if (arrows.length > 0) {
       return;
     }
