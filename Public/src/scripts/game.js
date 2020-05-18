@@ -1,24 +1,19 @@
 function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
+  menu = new Menu();
 }
 
 function start(){
   timer = new Timer(120, 10);
   timer.start()
-  startTime = true;
+  gameStart = true;
   
 }
 
 function draw() {
   background(255);
-  if (time == 0) {
-    bubbles.pop();
-    push();
-		fill(0, 0, 0);
-		stroke(51);
-		textSize(20);
-		text(`Game Over`, windowWidth / 2, windowHeight/ 2);
-		pop();
+  if (!gameStart) {
+    menu.draw();
   }
   
   // Draw bubbles
@@ -32,10 +27,24 @@ function draw() {
       bubble.y + bubble.diameter / 2 >= height - 50 &&
       bubble.x - bubble.diameter / 2 <= playerDirection + 50 &&
       bubble.x + bubble.diameter / 2 >= playerDirection
+      || time == 0
     ) {
-      bubbles.pop(bubble);
-      //THIS IS WHERE THE CODE FOR GAME OVER GOES
+      timer.gameOver()
+      gameOver = true;
     }
+  }
+
+  if(gameOver){
+    for (let index = 0; index < bubbles.length; index++) {
+      bubbles.pop(bubbles[index]);
+    }
+    push();
+    textAlign(CENTER);
+    fill(0, 0, 0);
+    stroke(51);
+    textSize(20);
+    text(`Game Over`, windowWidth / 2, windowHeight/ 2);
+    pop();
   }
 
   //Draw arrow
@@ -75,7 +84,7 @@ function draw() {
     }
   }
 
-  if (startTime === true) {
+  if (gameStart === true) {
     timer.draw();
   }
   //Draw Player
@@ -96,10 +105,6 @@ function draw() {
   }
 }
 
-function end(){
-  clearInterval(seconds);
-}
-
 // Read key presses to shoot arrows
 function keyPressed() {
   if (keyCode === 32) {
@@ -110,8 +115,28 @@ function keyPressed() {
     let base = createVector(playerDirection + 25, height);
     let vec = createVector(height, height);
     arrows.push(new Arrow(base, vec));
-  }else if(key === "s"){
-    start()
-    bubbles.push(new Bubble(width / 2, Math.floor(height / 3), 100, 5, 5, randomColor()));
   }
+  //up
+  else if(keyCode === 38){
+    if(menuPos > 1){
+      menuPos--;
+    }
+  }
+  // down
+  else if(keyCode === 40){
+    if(menuPos < 3){
+      menuPos++;
+    }
+  }
+  //enter
+  else if(keyCode === 13){
+    if (menuPos === 1) {
+      gameOver = false;
+      start()
+      bubbles.push(new Bubble(width / 2, Math.floor(height / 3), 100, 5, 5, randomColor()));
+    }
+  }
+
+  console.log(key);
+  
 }

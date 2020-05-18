@@ -40,13 +40,15 @@ class Timer {
 
 	end(){
 		clearInterval(seconds);
-		if (this.time != 0) {
-			const score = this.time * this.scorePerSecond;
-			return score;
-		}
-	
-		return 0;
+		const score = this.time * this.scorePerSecond;
+		gameStart = false;
+		return score;
 		
+	}
+
+	gameOver(){
+		clearInterval(seconds);
+		gameStart = false;
 	}
 	
 }
