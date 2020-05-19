@@ -67,7 +67,7 @@ function draw() {
       if (
         arrow.base.x <= bubble.x + bubble.diameter / 2 &&
         arrow.base.x >= bubble.x - bubble.diameter / 2 &&
-        Math.abs(arrow.vec.y) <= bubble.y + bubble.diameter / 2
+        arrow.vec.y <= bubble.y + bubble.diameter / 2
       ) {
         arrows.pop(arrow);
 
@@ -75,14 +75,14 @@ function draw() {
         if (bubble.diameter > 20) {
           const newDiameter = bubble.diameter / 2;
           const color = randomColor();
-          bubbles.pop(bubble);
+
           bubbles.push(
-            new Bubble(bubble.x, bubble.y, newDiameter, -5, -5, color),
-            new Bubble(bubble.x, bubble.y, newDiameter, 5, 5, color)
+            new Bubble(bubble.x, bubble.y, newDiameter, 5, -50, color),
+            new Bubble(bubble.x, bubble.y, newDiameter, -5, -50, color)
           );
-        } else {
-          bubbles.pop(bubble);
         }
+
+        bubbles.splice(i, 1);
 
         //Add score
         timer.countScore();
