@@ -13,7 +13,7 @@ function counter(maxTime) {
 
 class Timer {
   score = 0;
-  scorePerSecond;
+  scorePerBubble = 1.23857;
   end = false;
 
   constructor(maxTime, scorePerSecond) {
@@ -41,11 +41,15 @@ class Timer {
     counter(this.maxTime);
   }
 
+  countScore() {
+    this.score += this.time * this.scorePerBubble;
+  }
+
   end() {
     clearInterval(seconds);
-    const score = this.time * this.scorePerSecond;
+    // const score = this.time * this.scorePerSecond;
     gameStart = false;
-    return score;
+    return this.score;
   }
 
   gameOver() {

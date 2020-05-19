@@ -83,6 +83,9 @@ function draw() {
         } else {
           bubbles.pop(bubble);
         }
+
+        //Add score
+        timer.countScore();
       }
     }
   }
