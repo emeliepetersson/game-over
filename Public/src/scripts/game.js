@@ -8,7 +8,7 @@ function setup() {
 
 function start() {
   timer = new Timer(120, 10);
-  timer.start()
+  timer.start();
   gameStart = true;
 }
 
@@ -17,7 +17,7 @@ function draw() {
   setGradient(0, 0, width, height, c1, c2);
   if (!gameStart) {
     menu.draw();
-  }else {
+  } else {
     timer.draw();
   }
 
@@ -29,17 +29,17 @@ function draw() {
 
     // Check for collisions between bubble and player
     if (
-      bubble.y + bubble.diameter / 2 >= height - 70 &&
-      bubble.x - bubble.diameter / 2 <= playerDirection + 70 &&
-      bubble.x + bubble.diameter / 2 >= playerDirection
-      || time == 0
+      (bubble.y + bubble.diameter / 2 >= height - 70 &&
+        bubble.x - bubble.diameter / 2 <= playerDirection + 70 &&
+        bubble.x + bubble.diameter / 2 >= playerDirection) ||
+      time == 0
     ) {
-      timer.gameOver()
+      timer.gameOver();
       gameOver = true;
     }
   }
 
-  if(gameOver){
+  if (gameOver) {
     for (let index = 0; index < bubbles.length; index++) {
       bubbles.pop(bubbles[index]);
     }
@@ -48,7 +48,7 @@ function draw() {
     fill(0, 0, 0);
     stroke(51);
     textSize(20);
-    text(`Game Over`, windowWidth / 2, windowHeight/ 2);
+    text(`Game Over`, windowWidth / 2, windowHeight / 2);
     pop();
   }
 
@@ -105,7 +105,6 @@ function draw() {
   }
 }
 
-
 // Read key presses
 function keyPressed() {
   if (keyCode === 32) {
@@ -117,24 +116,25 @@ function keyPressed() {
     arrows.push(new Arrow(base, vec));
   }
   //up
-  else if(keyCode === 38){
-    if(menuPos > 1 && !gameStart){
+  else if (keyCode === 38) {
+    if (menuPos > 1 && !gameStart) {
       menuPos--;
     }
   }
   // down
-  else if(keyCode === 40 && !gameStart){
-    if(menuPos < 3){
+  else if (keyCode === 40 && !gameStart) {
+    if (menuPos < 3) {
       menuPos++;
     }
   }
   //enter
-  else if(keyCode === 13 && !gameStart){
+  else if (keyCode === 13 && !gameStart) {
     if (menuPos === 1) {
       gameOver = false;
-      start()
-      bubbles.push(new Bubble(width / 2, Math.floor(height / 3), 100, 5, 5, randomColor()));
+      start();
+      bubbles.push(
+        new Bubble(width / 2, Math.floor(height / 3), 100, 5, 5, randomColor())
+      );
     }
   }
-  
 }
