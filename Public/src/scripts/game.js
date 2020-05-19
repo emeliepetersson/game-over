@@ -94,13 +94,13 @@ function draw() {
   image(img, playerDirection, height - 70, 70, 70);
 
   // Read key presses to change player's direction
-  if (keyIsDown(LEFT_ARROW)) {
+  if (gameStart && keyIsDown(LEFT_ARROW)) {
     if (playerDirection - 10 < 0) {
       return;
     }
     playerDirection -= 10;
   }
-  if (keyIsDown(RIGHT_ARROW)) {
+  if (gameStart && keyIsDown(RIGHT_ARROW)) {
     if (playerDirection + 60 > windowWidth) {
       return;
     }
@@ -110,7 +110,7 @@ function draw() {
 
 // Read key presses
 function keyPressed() {
-  if (keyCode === 32) {
+  if (gameStart && keyCode === 32) {
     if (arrows.length > 0) {
       return;
     }
