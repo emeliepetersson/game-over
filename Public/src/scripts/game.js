@@ -67,7 +67,7 @@ function draw() {
       if (
         arrow.base.x <= bubble.x + bubble.diameter / 2 &&
         arrow.base.x >= bubble.x - bubble.diameter / 2 &&
-        Math.abs(arrow.vec.y) <= bubble.y + bubble.diameter / 2
+        arrow.vec.y <= bubble.y + bubble.diameter / 2
       ) {
         arrows.pop(arrow);
 
@@ -75,14 +75,14 @@ function draw() {
         if (bubble.diameter > 20) {
           const newDiameter = bubble.diameter / 2;
           const color = randomColor();
-          bubbles.pop(bubble);
+
           bubbles.push(
-            new Bubble(bubble.x, bubble.y, newDiameter, -5, -5, color),
-            new Bubble(bubble.x, bubble.y, newDiameter, 5, 5, color)
+            new Bubble(bubble.x, bubble.y, newDiameter, 5, -50, color),
+            new Bubble(bubble.x, bubble.y, newDiameter, -5, -50, color)
           );
-        } else {
-          bubbles.pop(bubble);
         }
+
+        bubbles.splice(i, 1);
 
         //Add score
         timer.countScore();
@@ -94,13 +94,13 @@ function draw() {
   image(img, playerDirection, height - 70, 70, 70);
 
   // Read key presses to change player's direction
-  if (keyIsDown(LEFT_ARROW)) {
+  if (gameStart && keyIsDown(LEFT_ARROW)) {
     if (playerDirection - 10 < 0) {
       return;
     }
     playerDirection -= 10;
   }
-  if (keyIsDown(RIGHT_ARROW)) {
+  if (gameStart && keyIsDown(RIGHT_ARROW)) {
     if (playerDirection + 60 > windowWidth) {
       return;
     }
@@ -110,7 +110,7 @@ function draw() {
 
 // Read key presses
 function keyPressed() {
-  if (keyCode === 32) {
+  if (gameStart && keyCode === 32) {
     if (arrows.length > 0) {
       return;
     }
