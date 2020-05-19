@@ -111,8 +111,8 @@ function keyPressed() {
     if (arrows.length > 0) {
       return;
     }
-    let base = createVector(playerDirection + 25, height);
-    let vec = createVector(height, height);
+    let base = createVector(playerDirection + 35, height);
+    let vec = createVector(height - 10, height - 10);
     arrows.push(new Arrow(base, vec));
   }
   //up
