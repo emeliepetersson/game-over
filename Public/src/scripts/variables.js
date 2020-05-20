@@ -14,3 +14,4 @@ let c1, c2;
 let particles = [];
 const gravity = 0.25;
 const colors = ["red", "orange", "yellow", "lime", "cyan", "magenta"];
+let level = 1;

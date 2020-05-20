@@ -11,6 +11,18 @@ function start() {
   timer.start();
   gameStart = true;
 
+  if (level === 1) {
+    bubbles.push(
+      new Bubble(width / 2, Math.floor(height / 3), 40, 5, 5, randomColor())
+    );
+  } else if (level === 2) {
+    bubbles.push(
+      new Bubble(width / 2, Math.floor(height / 3), 80, 5, 5, randomColor())
+    );
+    c1 = color(253, 255, 206);
+    c2 = color(252, 192, 175);
+  }
+
   particles.push(new Firework(width / 2, height / 2));
   particles.push(new Firework(width / 2 + 60, height / 2 + 70));
   particles.push(new Firework(width / 2 - 70, height / 2 - 50));
@@ -75,7 +87,9 @@ function draw() {
     particles = particles.filter((p) => p.isAlive);
 
     if (particles.length <= 0) {
+      level += 1;
       gameStart = false;
+      start();
       playerDirection = 0;
     }
   }
@@ -163,9 +177,6 @@ function keyPressed() {
     if (menuPos === 1) {
       gameOver = false;
       start();
-      bubbles.push(
-        new Bubble(width / 2, Math.floor(height / 3), 40, 5, 5, randomColor())
-      );
     }
   }
 }

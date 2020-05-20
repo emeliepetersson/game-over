@@ -16,10 +16,9 @@ class Timer {
   scorePerBubble = 1.23857;
   end = false;
 
-  constructor(maxTime, scorePerSecond) {
+  constructor(maxTime) {
     this.time = maxTime;
     this.maxTime = maxTime;
-    this.scorePerSecond = scorePerSecond;
   }
 
   draw() {
@@ -47,7 +46,6 @@ class Timer {
 
   end() {
     clearInterval(seconds);
-    // const score = this.time * this.scorePerSecond;
     gameStart = false;
     return this.score;
   }
