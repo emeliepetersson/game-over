@@ -50,6 +50,8 @@ function draw() {
     textSize(20);
     text(`Game Over`, windowWidth / 2, windowHeight / 2);
     pop();
+
+    playerDirection = 0;
   }
 
   //Draw arrow
