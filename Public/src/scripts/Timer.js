@@ -37,6 +37,7 @@ class Timer {
   }
 
   start() {
+    clearInterval(seconds);
     counter(this.maxTime);
   }
 
@@ -44,7 +45,7 @@ class Timer {
     this.score += this.time * this.scorePerBubble;
   }
 
-  end() {
+  stop() {
     clearInterval(seconds);
     gameStart = false;
     return this.score;

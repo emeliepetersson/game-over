@@ -7,7 +7,7 @@ function setup() {
 }
 
 function start() {
-  timer = new Timer(120, 10);
+  timer = new Timer(120);
   timer.start();
   gameStart = true;
 
