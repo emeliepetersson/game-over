@@ -68,7 +68,11 @@ function draw() {
     text(`Game Over`, windowWidth / 2, windowHeight / 2);
     pop();
 
+    //Reset variables
     playerDirection = 0;
+    level = 1;
+    c1 = color(219, 248, 255);
+    c2 = color(202, 252, 175);
   }
 
   // WINNING GAME
@@ -86,11 +90,28 @@ function draw() {
     });
     particles = particles.filter((p) => p.isAlive);
 
-    if (particles.length <= 0) {
+    if (particles.length <= 0 && level < 2) {
+      score += timer.score;
       level += 1;
       gameStart = false;
       start();
       playerDirection = 0;
+    } else if (level >= 2) {
+      push();
+      textAlign(CENTER);
+      fill(0, 0, 0);
+      stroke(51);
+      textSize(20);
+      text(`Your score: ${score}`, windowWidth / 2, windowHeight / 2 + 30);
+      pop();
+      if (particles.length <= 0) {
+        //Reset variables
+        gameStart = false;
+        playerDirection = 0;
+        level = 1;
+        c1 = color(219, 248, 255);
+        c2 = color(202, 252, 175);
+      }
     }
   }
 
