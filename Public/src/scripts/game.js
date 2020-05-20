@@ -10,11 +10,15 @@ function start() {
   timer = new Timer(120, 10);
   timer.start();
   gameStart = true;
+
+  particles.push(new Firework(width / 2, height / 2));
+  particles.push(new Firework(width / 2 + 60, height / 2 + 70));
+  particles.push(new Firework(width / 2 - 70, height / 2 - 50));
 }
 
 function draw() {
-  // Background
   setGradient(0, 0, width, height, c1, c2);
+
   if (!gameStart) {
     menu.draw();
   } else {
@@ -39,6 +43,7 @@ function draw() {
     }
   }
 
+  // GAME OVER
   if (gameOver) {
     for (let index = 0; index < bubbles.length; index++) {
       bubbles.pop(bubbles[index]);
@@ -52,6 +57,27 @@ function draw() {
     pop();
 
     playerDirection = 0;
+  }
+
+  // WINNING GAME
+  if (bubbles.length <= 0 && gameStart) {
+    push();
+    textAlign(CENTER);
+    fill(0, 0, 0);
+    stroke(51);
+    textSize(20);
+    text(`YOU WIN!`, windowWidth / 2, windowHeight / 2);
+    pop();
+    particles.forEach((p) => {
+      p.step();
+      p.draw();
+    });
+    particles = particles.filter((p) => p.isAlive);
+
+    if (particles.length <= 0) {
+      gameStart = false;
+      playerDirection = 0;
+    }
   }
 
   //Draw arrow
@@ -138,7 +164,7 @@ function keyPressed() {
       gameOver = false;
       start();
       bubbles.push(
-        new Bubble(width / 2, Math.floor(height / 3), 100, 5, 5, randomColor())
+        new Bubble(width / 2, Math.floor(height / 3), 40, 5, 5, randomColor())
       );
     }
   }
