@@ -2,23 +2,43 @@ function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
 
   menu = new Menu();
+  levelsMenu = new LevelsMenu();
+
   c1 = color(219, 248, 255);
   c2 = color(202, 252, 175);
 }
 
 function start() {
-  timer = new Timer(120, 10);
+  timer = new Timer(120);
   timer.start();
   gameStart = true;
+
+  if (level === 1) {
+    bubbles.push(
+      new Bubble(width / 2, Math.floor(height / 3), 40, 5, 5, randomColor())
+    );
+  } else if (level === 2) {
+    bubbles.push(
+      new Bubble(width / 2, Math.floor(height / 3), 80, 5, 5, randomColor())
+    );
+    c1 = color(253, 255, 206);
+    c2 = color(252, 192, 175);
+  }
+
+  particles.push(new Firework(width / 2, height / 2));
+  particles.push(new Firework(width / 2 + 60, height / 2 + 70));
+  particles.push(new Firework(width / 2 - 70, height / 2 - 50));
 }
 
 function draw() {
-  // Background
   setGradient(0, 0, width, height, c1, c2);
-  if (!gameStart) {
+
+  if (!gameStart && !showLevels) {
     menu.draw();
-  } else {
+  } else if (!showLevels) {
     timer.draw();
+  } else if (showLevels) {
+    levelsMenu.draw();
   }
 
   // Draw bubbles
@@ -39,6 +59,7 @@ function draw() {
     }
   }
 
+  // GAME OVER
   if (gameOver) {
     for (let index = 0; index < bubbles.length; index++) {
       bubbles.pop(bubbles[index]);
@@ -50,6 +71,57 @@ function draw() {
     textSize(20);
     text(`Game Over`, windowWidth / 2, windowHeight / 2);
     pop();
+
+    //Reset variables
+    playerDirection = 0;
+    level = 1;
+    c1 = color(219, 248, 255);
+    c2 = color(202, 252, 175);
+  }
+
+  // WINNING GAME
+  if (bubbles.length <= 0 && gameStart) {
+    push();
+    textAlign(CENTER);
+    fill(0, 0, 0);
+    stroke(51);
+    textSize(20);
+    text(`YOU WIN!`, windowWidth / 2, windowHeight / 2);
+    pop();
+    particles.forEach((p) => {
+      p.step();
+      p.draw();
+    });
+    particles = particles.filter((p) => p.isAlive);
+
+    if (particles.length <= 0 && level < 2) {
+      score += timer.score;
+      level += 1;
+      timer.stop();
+      start();
+      playerDirection = 0;
+    } else if (particles.length <= 0 && level == 2) {
+      score += timer.score;
+      level += 1;
+    } else if (level > 2) {
+      push();
+      textAlign(CENTER);
+      fill(0, 0, 0);
+      stroke(51);
+      textSize(20);
+      text(`Your score: ${score}`, windowWidth / 2, windowHeight / 2 + 30);
+      pop();
+      //Reset variables after 5 sec
+      setInterval(function () {
+        if (particles.length <= 0) {
+          timer.stop();
+          playerDirection = 0;
+          level = 1;
+          c1 = color(219, 248, 255);
+          c2 = color(202, 252, 175);
+        }
+      }, 5000);
+    }
   }
 
   //Draw arrow
@@ -110,6 +182,7 @@ function draw() {
 
 // Read key presses
 function keyPressed() {
+  //Shoot arrows
   if (gameStart && keyCode === 32) {
     if (arrows.length > 0) {
       return;
@@ -119,25 +192,42 @@ function keyPressed() {
     arrows.push(new Arrow(base, vec));
   }
   //up
-  else if (keyCode === 38) {
-    if (menuPos > 1 && !gameStart) {
+  else if (keyCode === 38 && !gameStart) {
+    if (menuPos > 1 && !showLevels) {
       menuPos--;
+    } else if (levelsMenuPos > 1) {
+      levelsMenuPos--;
     }
   }
   // down
   else if (keyCode === 40 && !gameStart) {
-    if (menuPos < 3) {
+    if (menuPos < 3 && !showLevels) {
       menuPos++;
+    } else if (levelsMenuPos < 2) {
+      levelsMenuPos++;
     }
   }
   //enter
-  else if (keyCode === 13 && !gameStart) {
+  else if (keyCode === 13 && !gameStart && !showLevels) {
     if (menuPos === 1) {
       gameOver = false;
       start();
-      bubbles.push(
-        new Bubble(width / 2, Math.floor(height / 3), 100, 5, 5, randomColor())
-      );
+    }
+    if (menuPos === 2) {
+      showLevels = true;
+    }
+  } else if (keyCode === 13 && showLevels) {
+    if (levelsMenuPos === 1) {
+      level = 1;
+      gameOver = false;
+      showLevels = false;
+      start();
+    }
+    if (levelsMenuPos === 2) {
+      level = 2;
+      gameOver = false;
+      showLevels = false;
+      start();
     }
   }
 }
