@@ -3,7 +3,7 @@ let movePlayer = 0;
 let img;
 let time;
 let timer;
-let gameStart;
+let gameStart = false;
 let menu;
 let menuPos = 1;
 let seconds;
@@ -16,3 +16,7 @@ const gravity = 0.25;
 const colors = ["red", "orange", "yellow", "lime", "cyan", "magenta"];
 let level = 1;
 let score = 0;
+
+let levelsMenu;
+let showLevels = false;
+let levelsMenuPos = 1;

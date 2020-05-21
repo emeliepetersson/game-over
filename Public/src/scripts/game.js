@@ -2,6 +2,8 @@ function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
 
   menu = new Menu();
+  levelsMenu = new LevelsMenu();
+
   c1 = color(219, 248, 255);
   c2 = color(202, 252, 175);
 }
@@ -31,10 +33,12 @@ function start() {
 function draw() {
   setGradient(0, 0, width, height, c1, c2);
 
-  if (!gameStart) {
+  if (!gameStart && !showLevels) {
     menu.draw();
-  } else {
+  } else if (!showLevels) {
     timer.draw();
+  } else if (showLevels) {
+    levelsMenu.draw();
   }
 
   // Draw bubbles
@@ -89,7 +93,6 @@ function draw() {
       p.draw();
     });
     particles = particles.filter((p) => p.isAlive);
-    gameWon = true;
 
     if (particles.length <= 0 && level < 2) {
       score += timer.score;
@@ -100,7 +103,7 @@ function draw() {
     } else if (particles.length <= 0 && level == 2) {
       score += timer.score;
       level += 1;
-    } else if (particles.length <= 0 && level >= 2) {
+    } else if (level > 2) {
       push();
       textAlign(CENTER);
       fill(0, 0, 0);
@@ -179,6 +182,7 @@ function draw() {
 
 // Read key presses
 function keyPressed() {
+  //Shoot arrows
   if (gameStart && keyCode === 32) {
     if (arrows.length > 0) {
       return;
@@ -188,21 +192,41 @@ function keyPressed() {
     arrows.push(new Arrow(base, vec));
   }
   //up
-  else if (keyCode === 38) {
-    if (menuPos > 1 && !gameStart) {
+  else if (keyCode === 38 && !gameStart) {
+    if (menuPos > 1 && !showLevels) {
       menuPos--;
+    } else if (levelsMenuPos > 1) {
+      levelsMenuPos--;
     }
   }
   // down
   else if (keyCode === 40 && !gameStart) {
-    if (menuPos < 3) {
+    if (menuPos < 3 && !showLevels) {
       menuPos++;
+    } else if (levelsMenuPos < 2) {
+      levelsMenuPos++;
     }
   }
   //enter
-  else if (keyCode === 13 && !gameStart) {
+  else if (keyCode === 13 && !gameStart && !showLevels) {
     if (menuPos === 1) {
       gameOver = false;
+      start();
+    }
+    if (menuPos === 2) {
+      showLevels = true;
+    }
+  } else if (keyCode === 13 && showLevels) {
+    if (levelsMenuPos === 1) {
+      level = 1;
+      gameOver = false;
+      showLevels = false;
+      start();
+    }
+    if (levelsMenuPos === 2) {
+      level = 2;
+      gameOver = false;
+      showLevels = false;
       start();
     }
   }
