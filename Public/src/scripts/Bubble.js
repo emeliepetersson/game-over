@@ -9,7 +9,8 @@ class Bubble {
 
   constructor(x, y, diameter, velocityX, velocityY, color) {
     this.x = x;
-    this.y = y;
+    this.y =
+      y >= height - (70 + diameter / 2) ? height - (85 + diameter / 2) : y;
     this.diameter = diameter;
     this.velocityX = velocityX;
     this.velocityY = velocityY;
@@ -17,9 +18,12 @@ class Bubble {
   }
 
   drawBubble() {
+    push();
     fill(this.color);
-    noStroke();
+    stroke(0);
+    strokeWeight(4);
     circle(this.x, this.y, this.diameter);
+    pop();
   }
 
   // updateBubble() {
