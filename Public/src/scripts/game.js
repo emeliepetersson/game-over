@@ -89,14 +89,18 @@ function draw() {
       p.draw();
     });
     particles = particles.filter((p) => p.isAlive);
+    gameWon = true;
 
     if (particles.length <= 0 && level < 2) {
       score += timer.score;
       level += 1;
-      gameStart = false;
+      timer.stop();
       start();
       playerDirection = 0;
-    } else if (level >= 2) {
+    } else if (particles.length <= 0 && level == 2) {
+      score += timer.score;
+      level += 1;
+    } else if (particles.length <= 0 && level >= 2) {
       push();
       textAlign(CENTER);
       fill(0, 0, 0);
@@ -104,14 +108,16 @@ function draw() {
       textSize(20);
       text(`Your score: ${score}`, windowWidth / 2, windowHeight / 2 + 30);
       pop();
-      if (particles.length <= 0) {
-        //Reset variables
-        gameStart = false;
-        playerDirection = 0;
-        level = 1;
-        c1 = color(219, 248, 255);
-        c2 = color(202, 252, 175);
-      }
+      //Reset variables after 5 sec
+      setInterval(function () {
+        if (particles.length <= 0) {
+          timer.stop();
+          playerDirection = 0;
+          level = 1;
+          c1 = color(219, 248, 255);
+          c2 = color(202, 252, 175);
+        }
+      }, 5000);
     }
   }
 

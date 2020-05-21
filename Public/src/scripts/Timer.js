@@ -37,7 +37,6 @@ class Timer {
   }
 
   start() {
-    clearInterval(seconds);
     counter(this.maxTime);
   }
 
