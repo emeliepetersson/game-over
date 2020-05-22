@@ -128,6 +128,9 @@ function draw() {
       score += timer.score;
       level += 1;
     } else if (level > 2) {
+      if (score > getItem("highScore")) {
+        storeItem("highScore", score);
+      }
       push();
       textAlign(CENTER);
       fill(0, 0, 0);
@@ -263,6 +266,7 @@ function keyPressed() {
       start();
     }
   } else if (keyCode === 27 && !gameStart && showLevels) {
+    clickSound.play();
     showLevels = false;
   }
 }
