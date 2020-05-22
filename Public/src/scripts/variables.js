@@ -17,6 +17,5 @@ const colors = ["red", "orange", "yellow", "lime", "cyan", "magenta"];
 let level = 1;
 let score = 0;
 
-let levelsMenu;
 let showLevels = false;
 let levelsMenuPos = 1;
