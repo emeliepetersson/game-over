@@ -54,16 +54,16 @@ function draw() {
         bubble.x + bubble.diameter / 2 >= playerDirection) ||
       time == 0
     ) {
-      timer.gameOver();
       gameOver = true;
     }
   }
 
   // GAME OVER
-  if (gameOver) {
+  if (gameOver && gameStart) {
     for (let index = 0; index < bubbles.length; index++) {
       bubbles.pop(bubbles[index]);
     }
+
     push();
     textAlign(CENTER);
     fill(0, 0, 0);
@@ -72,15 +72,20 @@ function draw() {
     text(`Game Over`, windowWidth / 2, windowHeight / 2);
     pop();
 
-    //Reset variables
-    playerDirection = 0;
-    level = 1;
-    c1 = color(219, 248, 255);
-    c2 = color(202, 252, 175);
+    //Reset variables after 3 sec
+    setTimeout(function () {
+      if (bubbles.length <= 0) {
+        timer.gameOver();
+        playerDirection = 0;
+        level = 1;
+        c1 = color(219, 248, 255);
+        c2 = color(202, 252, 175);
+      }
+    }, 3000);
   }
 
   // WINNING GAME
-  if (bubbles.length <= 0 && gameStart) {
+  if (bubbles.length <= 0 && gameStart && !gameOver) {
     push();
     textAlign(CENTER);
     fill(0, 0, 0);
@@ -112,7 +117,7 @@ function draw() {
       text(`Your score: ${score}`, windowWidth / 2, windowHeight / 2 + 30);
       pop();
       //Reset variables after 5 sec
-      setInterval(function () {
+      setTimeout(function () {
         if (particles.length <= 0) {
           timer.stop();
           playerDirection = 0;
