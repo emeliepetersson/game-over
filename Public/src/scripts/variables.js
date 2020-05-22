@@ -19,3 +19,10 @@ let score = 0;
 
 let showLevels = false;
 let levelsMenuPos = 1;
+
+let ballonPoppingSound;
+let shootArrowSound;
+let winningSound;
+let gameOverSound;
+let clickSound;
+let playSound = true;
