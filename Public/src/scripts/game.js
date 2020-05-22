@@ -6,12 +6,21 @@ function setup() {
 
   c1 = color(219, 248, 255);
   c2 = color(202, 252, 175);
+
+  //Load the sound files
+  soundFormats("mp3");
+  ballonPoppingSound = loadSound("./Assets/Balloon-Popping.mp3");
+  shootArrowSound = loadSound("./Assets/Shoot-Arrow.mp3");
+  winningSound = loadSound("./Assets/Win.mp3");
+  gameOverSound = loadSound("./Assets/Game-Over.mp3");
+  clickSound = loadSound("./Assets/Click.mp3");
 }
 
 function start() {
   timer = new Timer(120);
   timer.start();
   gameStart = true;
+  playSound = true;
 
   if (level === 1) {
     bubbles.push(
@@ -64,6 +73,11 @@ function draw() {
       bubbles.pop(bubbles[index]);
     }
 
+    if (playSound) {
+      gameOverSound.play();
+      playSound = false;
+    }
+
     push();
     textAlign(CENTER);
     fill(0, 0, 0);
@@ -98,6 +112,11 @@ function draw() {
       p.draw();
     });
     particles = particles.filter((p) => p.isAlive);
+
+    if (playSound) {
+      winningSound.play();
+      playSound = false;
+    }
 
     if (particles.length <= 0 && level < 2) {
       score += timer.score;
@@ -134,6 +153,7 @@ function draw() {
     const arrow = arrows[i];
 
     arrow.shootArrow();
+
     if (arrow.vec.y <= 0) {
       arrows.pop(arrow);
     }
@@ -147,6 +167,7 @@ function draw() {
         arrow.vec.y <= bubble.y + bubble.diameter / 2
       ) {
         arrows.pop(arrow);
+        ballonPoppingSound.play();
 
         //Create two new bubbles
         if (bubble.diameter > 20) {
@@ -195,9 +216,11 @@ function keyPressed() {
     let base = createVector(playerDirection + 35, height);
     let vec = createVector(height - 10, height - 10);
     arrows.push(new Arrow(base, vec));
+    shootArrowSound.play();
   }
   //up
   else if (keyCode === 38 && !gameStart) {
+    clickSound.play();
     if (menuPos > 1 && !showLevels) {
       menuPos--;
     } else if (levelsMenuPos > 1) {
@@ -206,6 +229,7 @@ function keyPressed() {
   }
   // down
   else if (keyCode === 40 && !gameStart) {
+    clickSound.play();
     if (menuPos < 3 && !showLevels) {
       menuPos++;
     } else if (levelsMenuPos < 2) {
@@ -214,6 +238,7 @@ function keyPressed() {
   }
   //enter
   else if (keyCode === 13 && !gameStart && !showLevels) {
+    clickSound.play();
     if (menuPos === 1) {
       gameOver = false;
       start();
@@ -222,6 +247,7 @@ function keyPressed() {
       showLevels = true;
     }
   } else if (keyCode === 13 && showLevels) {
+    clickSound.play();
     if (levelsMenuPos === 1) {
       level = 1;
       gameOver = false;
