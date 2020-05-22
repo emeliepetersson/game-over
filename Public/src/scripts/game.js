@@ -2,7 +2,6 @@ function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
 
   menu = new Menu();
-  levelsMenu = new LevelsMenu();
 
   c1 = color(219, 248, 255);
   c2 = color(202, 252, 175);
@@ -34,11 +33,12 @@ function draw() {
   setGradient(0, 0, width, height, c1, c2);
 
   if (!gameStart && !showLevels) {
-    menu.draw();
-  } else if (!showLevels) {
-    timer.draw();
+    menu.drawMain();
   } else if (showLevels) {
-    levelsMenu.draw();
+    menu.drawLevels();
+  }
+  if (gameStart) {
+    timer.draw();
   }
 
   // Draw bubbles
@@ -188,6 +188,8 @@ function draw() {
 // Read key presses
 function keyPressed() {
   //Shoot arrows
+  console.log(keyCode);
+
   if (gameStart && keyCode === 32) {
     if (arrows.length > 0) {
       return;
@@ -234,5 +236,7 @@ function keyPressed() {
       showLevels = false;
       start();
     }
+  } else if (keyCode === 27 && !gameStart && showLevels) {
+    showLevels = false;
   }
 }
