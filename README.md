@@ -1,3 +1,12 @@
+A game made with p5.js. You can play the game here: https://bubble-not-so-trouble.netlify.app/!
+
+## Testers
+
+
+## Code review
+
+
+## Pull request log 
 
 1. [First test](https://github.com/emeliepetersson/game-over/pull/1)
 2. [Delete DS_Store](https://github.com/emeliepetersson/game-over/pull/2)
