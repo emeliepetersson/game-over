@@ -27,7 +27,7 @@ function start() {
     );
   } else if (level === 2) {
     bubbles.push(
-      new Bubble(width / 2, Math.floor(height / 3), 140, 5, 5, randomColor())
+      new Bubble(width / 2, Math.floor(height / 3), 110, 5, 5, randomColor())
     );
     c1 = color(253, 255, 206);
     c2 = color(252, 192, 175);
@@ -58,8 +58,8 @@ function draw() {
 
     // Check for collisions between bubble and player
     if (
-      (bubble.y + bubble.diameter / 2 >= height - 70 &&
-        bubble.x - bubble.diameter / 2 <= playerDirection + 70 &&
+      (bubble.y + bubble.diameter / 2 >= height - 63 &&
+        bubble.x - bubble.diameter / 2 <= playerDirection + 60 &&
         bubble.x + bubble.diameter / 2 >= playerDirection) ||
       time == 0
     ) {
