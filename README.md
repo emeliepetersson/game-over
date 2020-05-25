@@ -14,6 +14,16 @@ Have fun!
 
 ## Testers
 
+#### 2 groups in the class:
+1.
+2.
+
+#### 4 users who knows nothing about programming:
+1. Isak Frindberg
+2.
+3.
+4.
+
 
 ## Code review
 By [Camilla Kylmänen Sjörén](https://github.com/camiwd) and [Maja Alin](https://github.com/majaalin).
