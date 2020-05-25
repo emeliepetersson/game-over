@@ -1,8 +1,5 @@
 class Bubble {
   // Acceleration
-  ay = 5;
-
-  vMultiplier = 0.1;
 
   constructor(x, y, diameter, velocityX, velocityY, color) {
     this.x = x;
@@ -12,6 +9,8 @@ class Bubble {
     this.velocityX = velocityX;
     this.velocityY = velocityY;
     this.color = color;
+    this.ay = 5;
+    this.vMultiplier = 0.1;
   }
 
   drawBubble() {

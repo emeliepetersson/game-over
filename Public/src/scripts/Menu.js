@@ -1,6 +1,8 @@
 class Menu {
-  menuX = width / 2;
-  menuY = height / 3 + 50;
+  constructor() {
+    this.menuX = width / 2;
+    this.menuY = height / 3 + 50;
+  }
 
   drawMain() {
     push();

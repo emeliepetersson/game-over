@@ -12,14 +12,13 @@ function counter(maxTime) {
 }
 
 class Timer {
-  score = 0;
-  scorePerBubble = 1.23857;
-  end = false;
-  highScore = getItem("highScore") === null ? 0 : getItem("highScore");
-
   constructor(maxTime) {
     this.time = maxTime;
     this.maxTime = maxTime;
+    this.score = 0;
+    this.scorePerBubble = 1.23857;
+    this.end = false;
+    this.highScore = getItem("highScore") === null ? 0 : getItem("highScore");
   }
 
   draw() {
