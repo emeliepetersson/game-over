@@ -73,6 +73,7 @@ By [Camilla Kylmänen Sjörén](https://github.com/camiwd) and [Maja Alin](https
 20. [Added highscore](https://github.com/emeliepetersson/game-over/pull/20)
 21. [Cleaned up code](https://github.com/emeliepetersson/game-over/pull/21)
 22. [Added text to menu and updated pull request log](https://github.com/emeliepetersson/game-over/pull/22)
+23. [Fixed bug with leftover code in Timer class](https://github.com/emeliepetersson/game-over/pull/23)
 
 ## License
 See [The MIT License](https://github.com/emeliepetersson/game-over/blob/master/LICENSE).
