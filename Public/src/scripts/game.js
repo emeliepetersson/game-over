@@ -69,8 +69,8 @@ function draw() {
 
   // GAME OVER
   if (gameOver && gameStart) {
-    for (let index = 0; index < bubbles.length; index++) {
-      bubbles.pop(bubbles[index]);
+    for (let i = 0; i < bubbles.length; i++) {
+      bubbles.pop(bubbles[i]);
     }
 
     if (playSound) {
@@ -83,7 +83,7 @@ function draw() {
     fill(0, 0, 0);
     stroke(51);
     textSize(20);
-    text(`Game Over`, windowWidth / 2, windowHeight / 2);
+    text(`Game Over`, width / 2, height / 2);
     pop();
 
     //Reset variables after 3 sec
@@ -105,7 +105,7 @@ function draw() {
     fill(0, 0, 0);
     stroke(51);
     textSize(20);
-    text(`YOU WIN!`, windowWidth / 2, windowHeight / 2);
+    text(`YOU WIN!`, width / 2, height / 2);
     pop();
     particles.forEach((p) => {
       p.step();
@@ -136,7 +136,7 @@ function draw() {
       fill(0, 0, 0);
       stroke(51);
       textSize(20);
-      text(`Your score: ${score}`, windowWidth / 2, windowHeight / 2 + 30);
+      text(`Your score: ${score}`, width / 2, height / 2 + 30);
       pop();
       //Reset variables after 5 sec
       setTimeout(function () {
@@ -200,7 +200,7 @@ function draw() {
     playerDirection -= 10;
   }
   if (gameStart && keyIsDown(RIGHT_ARROW)) {
-    if (playerDirection + 60 > windowWidth) {
+    if (playerDirection + 70 > width) {
       return;
     }
     playerDirection += 10;
