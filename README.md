@@ -15,7 +15,7 @@ Have fun!
 ## Testers
 
 #### 2 groups in the class:
-1.
+1. Group 1: Henric Björkvall and Julia Karlsson
 2.
 
 #### 4 users who knows nothing about programming:
