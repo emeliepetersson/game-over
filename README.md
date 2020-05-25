@@ -16,6 +16,27 @@ Have fun!
 
 
 ## Code review
+By [Camilla Kylmänen Sjörén](https://github.com/camiwd) and [Maja Alin](https://github.com/majaalin).
+
+1. player.js: naming of the file. the function preload() is used to preload all files/images in a project, maybe name the file preload.js instead, in case more images or files will be added later on.
+
+2. game.js: 133, 140, 166, 216. add spaces to make the code more readable as the file is very long
+
+3. how-to-play button - now you can only read the rules in the readme
+
+4. Timer.js:28 - if the time runs out the following error appears in the console: “Uncaught TypeError: gameOver is not a function. Timer.js:28”. Maybe try to declare the function before you’re calling on it?
+
+5. game.js:132 - The high score is not stored in local storage. We think this might have to do with the storeItem() function.
+
+6. game:js - Great comments! It was easy to follow! Maybe you could have some more comments in the other files as well.
+
+7. game.js:1, 18 - It might have been even easier to read the code if it was split into a few more files, maybe setup() and start() could be in their own file to make it more readable.
+
+8. variables.js - Good that you put the variables in an own file.
+
+9. Timer.js:16 - Maybe the score should be rounded two decimals, to make it more comparable with others.
+
+10. All in all we think it’s a well written code and we cannot find any other lines to correct :slightly_smiling_face:
 
 
 ## Pull request log 
