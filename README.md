@@ -40,6 +40,8 @@ Have fun!
 18. [Added sound effects](https://github.com/emeliepetersson/game-over/pull/18)
 19. [Small adjustments to Bubble size and collision](https://github.com/emeliepetersson/game-over/pull/19)
 20. [Added highscore](https://github.com/emeliepetersson/game-over/pull/20)
+21. [Cleaned up code](https://github.com/emeliepetersson/game-over/pull/21)
+22. [Added text to menu and updated pull request log](https://github.com/emeliepetersson/game-over/pull/22)
 
 ## License
 See [The MIT License](https://github.com/emeliepetersson/game-over/blob/master/LICENSE).

@@ -39,7 +39,10 @@ class Menu {
         this.menuX - 46,
         this.menuY + 40
       );
+      textSize(12);
+      text(`(Not Active)`, this.menuX, this.menuY + 62);
     }
+    textSize(24);
     text(`Settings`, this.menuX, this.menuY + 48);
 
     pop();
