@@ -1,5 +1,17 @@
 A game made with p5.js. You can play the game here: https://bubble-not-so-trouble.netlify.app/!
 
+# How to play
+This game is inspired by Bubble Trouble. 
+
+- Press enter to start game, or use the down key to choose level.
+- Move player with right and left keys.
+- Shoot arrows with space.
+- To level up you have to shoot all bubbles until there is no left.
+- This game has only two levels so when the second level is done you have won the game. 
+- When you start a new game you will se your highscore in the score table in the top left corner.
+
+Have fun!
+
 ## Testers
 
 
