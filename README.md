@@ -28,3 +28,6 @@ A game made with p5.js. You can play the game here: https://bubble-not-so-troubl
 18. [Added sound effects](https://github.com/emeliepetersson/game-over/pull/18)
 19. [Small adjustments to Bubble size and collision](https://github.com/emeliepetersson/game-over/pull/19)
 20. [Added highscore](https://github.com/emeliepetersson/game-over/pull/20)
+
+## License
+See [The MIT License](https://github.com/emeliepetersson/game-over/blob/master/LICENSE).
