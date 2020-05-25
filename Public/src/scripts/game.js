@@ -23,11 +23,11 @@ function start() {
 
   if (level === 1) {
     bubbles.push(
-      new Bubble(width / 2, Math.floor(height / 3), 40, 5, 5, randomColor())
+      new Bubble(width / 2, Math.floor(height / 3), 60, 5, 5, randomColor())
     );
   } else if (level === 2) {
     bubbles.push(
-      new Bubble(width / 2, Math.floor(height / 3), 80, 5, 5, randomColor())
+      new Bubble(width / 2, Math.floor(height / 3), 110, 5, 5, randomColor())
     );
     c1 = color(253, 255, 206);
     c2 = color(252, 192, 175);
@@ -58,8 +58,8 @@ function draw() {
 
     // Check for collisions between bubble and player
     if (
-      (bubble.y + bubble.diameter / 2 >= height - 70 &&
-        bubble.x - bubble.diameter / 2 <= playerDirection + 70 &&
+      (bubble.y + bubble.diameter / 2 >= height - 63 &&
+        bubble.x - bubble.diameter / 2 <= playerDirection + 60 &&
         bubble.x + bubble.diameter / 2 >= playerDirection) ||
       time == 0
     ) {
@@ -159,28 +159,26 @@ function draw() {
     }
 
     //Check for collision between arrow and bubbles
-    for (let i = 0; i < bubbles.length; i++) {
-      const bubble = bubbles[i];
+    for (let j = 0; j < bubbles.length; j++) {
+      const bubble = bubbles[j];
       if (
         arrow.base.x <= bubble.x + bubble.diameter / 2 &&
         arrow.base.x >= bubble.x - bubble.diameter / 2 &&
         arrow.vec.y <= bubble.y + bubble.diameter / 2
       ) {
-        arrows.pop(arrow);
+        const newDiameter = bubble.diameter / 2;
+        const color = randomColor();
+        arrows.splice(i, 1);
         ballonPoppingSound.play();
+        bubbles.splice(j, 1);
 
         //Create two new bubbles
         if (bubble.diameter > 20) {
-          const newDiameter = bubble.diameter / 2;
-          const color = randomColor();
-
           bubbles.push(
             new Bubble(bubble.x, bubble.y, newDiameter, 5, -50, color),
             new Bubble(bubble.x, bubble.y, newDiameter, -5, -50, color)
           );
         }
-
-        bubbles.splice(i, 1);
 
         //Add score
         timer.countScore();
@@ -209,8 +207,6 @@ function draw() {
 // Read key presses
 function keyPressed() {
   //Shoot arrows
-  console.log(keyCode);
-
   if (gameStart && keyCode === 32) {
     if (arrows.length > 0) {
       return;
