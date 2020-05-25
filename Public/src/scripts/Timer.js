@@ -15,6 +15,7 @@ class Timer {
   score = 0;
   scorePerBubble = 1.23857;
   end = false;
+  highScore = getItem("highScore") === null ? 0 : getItem("highScore");
 
   constructor(maxTime) {
     this.time = maxTime;

@@ -25,3 +25,6 @@ A game made with p5.js. You can play the game here: https://bubble-not-so-troubl
 15. [Fix bubble bounce height and visibility](https://github.com/emeliepetersson/game-over/pull/15)
 16. [Updated game over screen](https://github.com/emeliepetersson/game-over/pull/16)
 17. [Updated Menu class and readme](https://github.com/emeliepetersson/game-over/pull/17)
+18. [Added sound effects](https://github.com/emeliepetersson/game-over/pull/18)
+19. [Small adjustments to Bubble size and collision](https://github.com/emeliepetersson/game-over/pull/19)
+20. [Added highscore](https://github.com/emeliepetersson/game-over/pull/20)
