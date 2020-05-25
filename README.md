@@ -15,8 +15,8 @@ Have fun!
 ## Testers
 
 #### 2 groups in the class:
-1. Group 1: Henric Björkvall and Julia Karlsson
-2.
+1. Group 01: Henric Björkvall and Julia Karlsson
+2. Group 08: Oskar Sjölin Joss and Terese Thulin
 
 #### 4 users who knows nothing about programming:
 1. Isak Frindberg
