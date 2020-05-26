@@ -12,6 +12,10 @@ This game is inspired by Bubble Trouble.
 
 Have fun!
 
+
+## Authors
+[Emelie Petersson](https://github.com/emeliepetersson) and [Oskar Turesson](https://github.com/Cleanly1)
+
 ## Testers
 
 #### 2 groups in the class:
@@ -21,7 +25,7 @@ Have fun!
 #### 4 users who knows nothing about programming:
 1. Isak Frindberg
 2. Flavio Melchiori
-3.
+3. Sonja Hahn
 4.
 
 
@@ -75,6 +79,7 @@ By [Camilla Kylmänen Sjörén](https://github.com/camiwd) and [Maja Alin](https
 22. [Added text to menu and updated pull request log](https://github.com/emeliepetersson/game-over/pull/22)
 23. [Fixed bug with leftover code in Timer class](https://github.com/emeliepetersson/game-over/pull/23)
 24. [Place all variables in the constructor](https://github.com/emeliepetersson/game-over/pull/24)
+25. [Added titles to menus and updated readme](https://github.com/emeliepetersson/game-over/pull/25)
 
 ## License
 See [The MIT License](https://github.com/emeliepetersson/game-over/blob/master/LICENSE).

@@ -9,6 +9,8 @@ class Menu {
     textAlign(CENTER);
     fill(0, 0, 0);
     stroke(51);
+    textSize(36);
+    text(`Bubble Not So Trouble`, this.menuX, this.menuY - 100);
     textSize(24);
     if (menuPos === 1) {
       triangle(
@@ -55,6 +57,8 @@ class Menu {
     textAlign(CENTER);
     fill(0, 0, 0);
     stroke(51);
+    textSize(36);
+    text(`Choose a Level`, this.menuX, this.menuY - 100);
     textSize(24);
     if (levelsMenuPos === 1) {
       triangle(
