@@ -26,7 +26,7 @@ Have fun!
 1. Isak Frindberg
 2. Flavio Melchiori
 3. Sonja Hahn
-4.
+4. Josefine Ahlstrand
 
 
 ## Code review
